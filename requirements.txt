@@ -1,0 +1,3 @@
+# List of packages to install, format:
+#   packageName==packageVersion
+# emoji==2.1.0

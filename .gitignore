@@ -1,0 +1,2 @@
+# Don't put autosave files into Git
+jupyter-data/*/.ipynb_checkpoints/
