@@ -167,7 +167,7 @@ The connections between the filesystem inside the Docker container and the host 
 A classic [`requirements.txt`](https://pip.pypa.io/en/stable/reference/requirements-file-format/) file that defines what Python packages should be installed. It also can (and should) define what version of each package should be used.
 
 
-### 'README.md`
+### `README.md`
 
 You're looking at it right now. :)
 
