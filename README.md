@@ -8,22 +8,46 @@ This project was developed in response to [a request from the Mount Holyoke Coll
 
 This project requires you to install [Docker](https://www.docker.com/), and uses Docker Compose. 
 
-Please ensure that your version of Docker includes Docker Compose version 2.0+. You can check this by running `docker compose version`.
+Please ensure that your version of Docker includes Docker Compose version 2.0+. If you have a recentish version of Docker, you probably already do. You can check this by running `docker compose version`.
 
 
 ### Very basic Docker level-setting
 
-A Docker _container_ is created based on a Docker _image_. The Docker image is a blueprint that Docker uses when instantiating a container. When this document refers to the "container", it means "the instance of JupyterLab that is running in Docker on your computer/host machine". 
+[Docker](https://simple.wikipedia.org/wiki/Docker_(software)) is a technology that bundles a software program with all of the other software that application needs to run, such as an operating system, third-party software libraries, etc (hat tip: Simple Wikipedia).
 
-You may see _container_ and _service_ used seemingly interchangeably in your adventures across the internet. If this were running in a highly scalable environment (Docker Swarm, Kubernetes, whatever), a single service could have multiple containers handling requests in parallel. For this project, we're unlikely to require that kind of complexity, so you can understand them as basically identical for now -- each service will run in exactly one container.
+A Docker _service_ is provided by one or more Docker _containers_ that run some application code. A Docker _container_ is created based on a Docker _image_.
 
-__TL;DR:__ You could run multiple Docker _containers_ that all use the same Docker _image_ -- together, those containers would be called a Docker _service_. You probably won't for this project, but you could. In our case, you will probably run a single _service_ that runs in a single _container_ that is based on a single _image_.
+#### What? 
+
+When this document refers to the "container", it means "the instance of JupyterLab that is running in Docker on your computer/host machine". 
+
+The concept of a Docker image is a little bit more complicated, but it's basically a blueprint that Docker uses when instantiating/creating a container. An image is typically defined in a file called `Dockerfile`. A `Dockerfile` can begin by including another image as its base that it then extends to add additional functionality (ours does this). 
+
+The `Dockerfile` can be further configured by adding another file to enable the `docker compose` tool, which is typically named `compose.yml`. 
+
+`docker compose` is a tool that is (now) included with a basic Docker installation that provides some additional scaffolding around the base `docker` commands to make things a little easier to deal with.
+
+You can find out more about the specific files in the ["Project structure"](#project-structure) section of this document and in the comments within each file.
+
+##### But you also mentioned Docker services earlier, what are those?
+
+There is another thing called a Docker _service_. We have a pretty simple Docker use-case (in that we're probably not going to need highly scalable deployment), so we will probably run a single _service_ that runs in a single _container_ that is based on a single _image_. 
+
+You can understand _services_ and _containers_ as basically identical for now.
+
+###### But what _are_ they?
+
+You could use Docker Swarm/Kubernetes/etc to run multiple Docker _containers_ that all use the same Docker _image_ -- together, those containers each provide distributed access to a Docker _service_. This means that in a Swarm/Kubernetes installation, a single service could have multiple containers handling requests in parallel. The collections of identical containers have different names in Swarm and Kubernetes ("pods", "swarms", etc). 
+
+Kubernetes and Docker Swarm are ways to orchestrate your containers and they automagically manage request loads and spin up/cull containers and their associated resources as needed.
+
+However, that level of complexity is likely unnecessary for this use.
 
 
 
 ## Notes on implementation
 
-This project is set up to save the environment (JupyterLab, notebooks, and R/Python packages) for the project. It is _not_ set up to keep autosave information or other [dotfiles](https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory) that are understood as incidental and unrelated to the reproducibility of the results.
+This project is set up to save the environment (JupyterLab, notebooks, and R/Python packages) for the project. It is _not_ set up to keep autosave information or other [dotfiles](https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory) that are understood as incidental and unrelated to the reproducibility of the research results.
 
 
 ### JupyterLab
@@ -33,17 +57,19 @@ This repository provides the scaffolding for a Docker-based JupyterHub service/c
 
 ### Python package requirements
 
-Python package requirements can be specified in `requirements.txt`. These packages are automatically installed when the container is built. You may also [change the installed packages without rebuilding the containers](#changing-the-installed-packages).
+Python package requirements can be specified in `requirements.txt` and are installed using `pip`. These packages are automatically installed when the container is built. You may also [change the installed packages without rebuilding the containers](#changing-the-installed-packages).
 
 For reproducibility, I suggest using this format to "pin" the version of the package to the exact version you are using when you add packages to the requirements file:
 ```python
 packageName==packageVersion
 ```
 
+There are references to `conda` in `Dockerfile` in addition to `pip` -- this might be a thing that we want to leverage farther/differently.
+
 
 ### R package requirements
 
-__TODO__.
+__TODO__. I don't know how R manages packages.
 
 
 ### Notebooks
@@ -90,7 +116,7 @@ At the command line:
 $ docker exec -it containerName jupyter server list
 ```
 
-**TODO** explore a different authentication method that isn't this annoying.
+__TODO__ explore a different authentication method that isn't this annoying.
 
 
 
