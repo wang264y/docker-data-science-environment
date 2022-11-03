@@ -85,6 +85,10 @@ On your host machine, you will find the `demo-notebooks` and `work` directories 
 ## Interacting with JupyterLab / Docker
 You'll need some special commands in order to actually use the JupyterLab in Docker.
 
+These commands assume that you:
+- Already have Docker running 
+- Have `cd`ed to the directory where the `Dockerfile` and `compose.yml` reside.
+
 
 
 ### Initially starting the container

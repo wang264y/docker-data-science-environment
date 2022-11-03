@@ -1,2 +1,5 @@
-# Don't put autosave files into Git
-jupyter-data/*/.ipynb_checkpoints/
+# Ignore dotfiles and dotdirectories
+jupyter-data/.*
+
+# Ignore autosave information
+jupyter-data/**/.ipynb_checkpoints/

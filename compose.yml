@@ -8,13 +8,7 @@ services:
     # This is what makes jupyter accessible at localhost:10000
     ports:
       - "10000:8888"
-    # This connects this directory and all of its children on your host machine
-    # to /tmp in the container. This makes it possible to edit and re-run 
-    # `pip install` using /tmp/requirements.txt without rebuilding the 
-    # container.
     volumes:
-      - './:/tmp'
       # This connects the Jupyter notebook directory to the host machine so
       # that can all be checked into version control.
-      - './jupyter-data/demo-notebooks:/home/jovyan/demo-notebooks'
-      - './jupyter-data/work:/home/jovyan/work'
+      - './jupyter-data:/home/jovyan/'
