@@ -1,0 +1,20 @@
+# =============================================================================
+# List of packages to install, format:
+#   packageName==packageVersion
+# =============================================================================
+#
+# -----------------------------------------------------------------------------
+# JupyterLab extensions
+#   These are some recommended packages pinned to their current version at the 
+#   time of this repository's development -- update versions, add extensions or 
+#   remove them at will.
+# -----------------------------------------------------------------------------
+ipympl==0.9.2
+jupyterlab-spellchecker==0.7.2
+jupyterlab_execute_time==2.3.0
+jupyterlab-system-monitor==0.8.0
+#
+# -----------------------------------------------------------------------------
+# Other Python packages
+# -----------------------------------------------------------------------------
+# emoji==2.1.0

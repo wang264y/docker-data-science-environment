@@ -72,6 +72,25 @@ There are references to `conda` in `Dockerfile` in addition to `pip` -- this mig
 __TODO__. I don't know how R manages packages.
 
 
+### JupyterLab extensions
+
+Most of these are basically just Python packages, so [add them to `requirements.txt` like any other Python package](#python-package-requirements). If the package has installation directions for `pip install`, then it can be done this way.
+
+#### Extensions that can't be installed as Python packages
+
+For extensions that can only be installed with `jupyter labextension install`, add the following to the end of the `Dockerfile`, then [rebuild the containers](#rebuilding-the-container):
+```dockerfile
+RUN jupyter labextension install <extension-name>
+```
+
+Some extensions claim to be installable via `pip`, but throw errors. You may wish to fall back to installing with `jupyter labextension install` for these as well.
+
+For reproducibility, I suggest using this format to "pin" the version of the package to the exact version you are using when you add packages to the `Dockerfile`:
+```dockerfile
+RUN jupyter labextension install <extension-name>@<version>
+```
+
+
 ### Notebooks
 
 Notebooks that are saved in `demo-notebooks` or `work` when interacting with JupyterLab in the container will be available to version control in Git. 
@@ -95,7 +114,7 @@ These commands assume that you:
 
 At the command line:
 ```bash
-$ docker compose up -d
+docker compose up -d
 ```
 
 When it's done spinning up, the container will be accessible at http://localhost:10000/.
@@ -105,7 +124,7 @@ When it's done spinning up, the container will be accessible at http://localhost
 
 To interact more deeply with the JupyterLab container, you'll sometimes need to know its name. Find it by running 
 ```bash
-$ docker container list --filter name="notebook"
+docker container list --filter name="notebook"
 ```
 
 The container name is the one in the right-most column. Use it in place of `containerName` in the commands in this document.
@@ -117,7 +136,7 @@ This does change every time you rebuild the container.
 
 At the command line:
 ```bash
-$ docker exec -it containerName jupyter server list
+docker exec -it containerName jupyter server list
 ```
 
 __TODO__ explore a different authentication method that isn't this annoying.
@@ -128,7 +147,7 @@ __TODO__ explore a different authentication method that isn't this annoying.
 
 At the command line:
 ```bash
-$ docker compose stop
+docker compose stop
 ```
 
 
@@ -136,7 +155,7 @@ $ docker compose stop
 
 You don't necessarily have to do `docker compose up -d` again. Instead you can just do:
 ``` bash
-$ docker compose start
+docker compose start
 ```
 
 
@@ -144,8 +163,8 @@ $ docker compose start
 
 At the command line:
 ```bash
-$ docker compose build
-$ docker compose up -d
+docker compose build
+docker compose up -d
 ```
 
 
@@ -153,7 +172,7 @@ $ docker compose up -d
 
 Edit `requirements.txt` to add your Python packages, then at the command line:
 ```bash
-$ docker exec -it containerName pip install --no-cache-dir --requirement /tmp/requirements.txt
+docker exec -it containerName pip install --no-cache-dir --quiet --requirement ./requirements.txt
 ```
 
 
@@ -164,6 +183,10 @@ $ docker exec -it containerName pip install --no-cache-dir --requirement /tmp/re
 ### `jupyter-data/`
 
 This is the stuff that is shared between the Docker container and your computer/the host machine.
+
+#### `requirements.txt`
+
+A classic [`requirements.txt`](https://pip.pypa.io/en/stable/reference/requirements-file-format/) file that defines what Python packages should be installed. It also can (and should) define what version of each package should be used.
 
 #### `jupyter-data/demo-notebooks/get-url-in-python.ipynb`
 
@@ -191,10 +214,6 @@ These two files work together to create the Docker environment.
 `Dockerfile` defines the Docker image for the container, and `compose.yml` defines the Docker service that uses that image. 
 
 The connections between the filesystem inside the Docker container and the host machine, the configuration to make JupyterHub available at `localhost:1000`, and the automatic installation of the packages in `requirements.txt` are defined in these files.
-
-
-### `requirements.txt`
-A classic [`requirements.txt`](https://pip.pypa.io/en/stable/reference/requirements-file-format/) file that defines what Python packages should be installed. It also can (and should) define what version of each package should be used.
 
 
 ### `README.md`
