@@ -69,8 +69,16 @@ There are references to `conda` in `Dockerfile` in addition to `pip` -- this mig
 
 ### R package requirements
 
-__TODO__. I don't know how R manages packages.
+1. Find the package on cran.r-project.org (eg: https://cran.r-project.org/package=XML)
+1. Find the appropriate version of the package, either in the "Package source" link or on the "Old sources" archive page.
+1. In the `Dockerfile` add a line like this, and modify it to use the link from the previous step for the first parameter:
+```dockerfile
+RUN R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/XML/XML_3.99-0.3.tar.gz', repos=NULL, type='source')"
+```
 
+Hints:
+1. You can also sometimes find `tar.gz` files for R packages on GitHub.
+1. If the most recent version of the package won't install, you can figure out the most recent compatible version by running `packages.install("package-name")` in an R notebook in JupyterLab, then running `packageVersion("package-name")`. Then, be sure to find that version on GitHub or on cran.r-project.org and add that version of the package to the `Dockerfile`.
 
 ### JupyterLab extensions
 
