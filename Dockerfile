@@ -16,4 +16,4 @@ RUN R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/XML/X
 # The install syntax is weird here, in order to pin a specific version:
 #   jupyter labextension install <extension-name>@<version>
 RUN jupyter labextension install jupyterlab-spreadsheet@0.4.1
-
+RUN jupyter labextension install @lckr/jupyterlab_variableinspector@3.0.7
