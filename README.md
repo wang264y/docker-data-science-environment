@@ -72,9 +72,9 @@ There are references to `conda` in `Dockerfile` in addition to `pip` -- this mig
 1. Find the package on cran.r-project.org (eg: https://cran.r-project.org/package=XML)
 1. Find the appropriate version of the package, either in the "Package source" link or on the "Old sources" archive page.
 1. In the `Dockerfile` add a line like this, and modify it to use the link from the previous step for the first parameter:
-```dockerfile
-RUN R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/XML/XML_3.99-0.3.tar.gz', repos=NULL, type='source')"
-```
+    ```dockerfile
+    RUN R -e "install.packages('https://cran.r-project.org/src/contrib/Archive/XML/XML_3.99-0.3.tar.gz', repos=NULL, type='source')"
+    ```
 
 Hints:
 1. You can also sometimes find `tar.gz` files for R packages on GitHub.
@@ -86,17 +86,13 @@ Most of these are basically just Python packages, so [add them to `requirements.
 
 #### Extensions that can't be installed as Python packages
 
-For extensions that can only be installed with `jupyter labextension install`, add the following to the end of the `Dockerfile`, then [rebuild the containers](#rebuilding-the-container):
+For extensions that can only be installed with `jupyter labextension install`, add the following to the end of the `Dockerfile`, then [rebuild the containers](#rebuilding-the-container). For reproducibility, I suggest using this format to "pin" the version of the package to the exact version you are using when you add packages to the `Dockerfile`:
 ```dockerfile
-RUN jupyter labextension install <extension-name>
+RUN jupyter labextension install <extension-name>@<version>
 ```
 
 Some extensions claim to be installable via `pip`, but throw errors. You may wish to fall back to installing with `jupyter labextension install` for these as well.
 
-For reproducibility, I suggest using this format to "pin" the version of the package to the exact version you are using when you add packages to the `Dockerfile`:
-```dockerfile
-RUN jupyter labextension install <extension-name>@<version>
-```
 
 
 ### Notebooks
@@ -128,15 +124,6 @@ docker compose up -d
 When it's done spinning up, the container will be accessible at http://localhost:10000/.
 
 
-#### Container names
-
-To interact more deeply with the JupyterLab container, you'll sometimes need to know its name. Find it by running 
-```bash
-docker container list --filter name="notebook"
-```
-
-The container name is the one in the right-most column. Use it in place of `containerName` in the commands in this document.
-
 
 #### Getting your random authentication token for logging into the web interface
 
@@ -144,7 +131,7 @@ This does change every time you rebuild the container.
 
 At the command line:
 ```bash
-docker exec -it containerName jupyter server list
+docker compose exec datascience-notebook jupyter server list
 ```
 
 __TODO__ explore a different authentication method that isn't this annoying.
@@ -180,7 +167,7 @@ docker compose up -d
 
 Edit `requirements.txt` to add your Python packages, then at the command line:
 ```bash
-docker exec -it containerName pip install --no-cache-dir --quiet --requirement ./requirements.txt
+docker compose exec datascience-notebook pip install --no-cache-dir --quiet --requirement ./requirements.txt
 ```
 
 
