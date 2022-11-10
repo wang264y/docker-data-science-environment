@@ -24,6 +24,11 @@ A classic [`requirements.txt`](https://pip.pypa.io/en/stable/reference/requireme
 
 A classic [`.gitignore`](https://git-scm.com/docs/gitignore) file for specifying what files Git should consider as not eligible for version control. This is how we exclude autosave information from our repository.
 
+### `.jupyter/jupyter_server_config.py`
+
+The Jupyter server configuration. This is where we disable token authentication, since it's not needed for an application just running on a private host machine.
+
+
 ### `demo-notebooks`
 
 These contain demo code and may be removed by the researcher.
