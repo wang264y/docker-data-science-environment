@@ -1,9 +1,11 @@
 version: '3.9'
 services:
   datascience-notebook:
-    # This (.) is a default value, and means "the file named Dockerfile in the 
-    # same directory as this compose.yml file"
-    build: . 
+    build: 
+      # Make the parent project the root directory instead of this one.
+      context: ../
+      # Use the Dockerfile in the environment directory
+      dockerfile: environment/Dockerfile
     # Map port 8888 in the container to port 10000 on the host machine.
     # This is what makes jupyter accessible at localhost:10000
     ports:
@@ -11,4 +13,5 @@ services:
     volumes:
       # This connects the Jupyter notebook directory to the host machine so
       # that can all be checked into version control.
-      - './jupyter-data:/home/jovyan/'
+      - '../analysis:/home/jovyan/'
+      - '../data:/home/jovyan/data'

@@ -1,5 +1,0 @@
-# Ignore dotfiles and dotdirectories
-jupyter-data/.*
-
-# Ignore autosave information
-jupyter-data/**/.ipynb_checkpoints/
