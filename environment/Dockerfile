@@ -4,7 +4,7 @@
 FROM jupyter/datascience-notebook:9e63909e0317
 
 # Install Python packages from requirements.txt file
-COPY --chown=${NB_UID}:${NB_GID} ./analysis/requirements.txt .
+COPY --chown=${NB_UID}:${NB_GID} ./environment/requirements.txt /home/${NB_USER}/
 RUN pip install --quiet --no-cache-dir --requirement ./requirements.txt && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"

@@ -50,7 +50,7 @@ docker compose -f environment/compose.yml start
 
 ### Python package requirements
 
-Python package requirements can be specified in `analysis/requirements.txt` and are installed using `pip`. These packages are automatically installed when the container is built. You may also [change the installed packages without rebuilding the containers](#changing-the-installed-packages).
+Python package requirements can be specified in `environment/requirements.txt` and are installed using `pip`. These packages are automatically installed when the container is built. You may also [change the installed packages without rebuilding the containers](#changing-the-installed-packages).
 
 For reproducibility, I suggest using this format to "pin" the version of the package to the exact version you are using when you add packages to the requirements file:
 ```python
@@ -73,7 +73,7 @@ Hints:
 
 ### JupyterLab extensions
 
-Most of these are basically just Python packages, so [add them to `analysis/requirements.txt` like any other Python package](#python-package-requirements). If the package has installation directions for `pip install`, then it can be done this way.
+Most of these are basically just Python packages, so [add them to `environment/requirements.txt` like any other Python package](#python-package-requirements). If the package has installation directions for `pip install`, then it can be done this way.
 
 #### Extensions that can't be installed as Python packages
 
@@ -88,7 +88,7 @@ Some extensions claim to be installable via `pip`, but throw errors. You may wis
 
 ## Install new package or extension requirements
 
-You can apply changes in `analysis/requirements.txt` by running: 
+You can apply changes in `environment/requirements.txt` by running: 
 ```bash
 docker compose -f environment/compose.yml exec datascience-notebook pip install --no-cache-dir --quiet --requirement ./requirements.txt
 ```
@@ -111,7 +111,12 @@ This is where your data should go. These files are shared between the Docker con
 
 ### `environment/`
 
-This is where the Docker configuration lives. You may need to modify `environment/Dockerfile` to add R packages or some JupyterLab extensions, but otherwise you can kind of ignore these files.
+This is where the Docker, Python package, and Jupyter server configuration live. 
+
+- Python packages and most JupyterLab extensions are specified in `environment/requirements.txt`. This is a classic [`requirements.txt`](https://pip.pypa.io/en/stable/reference/requirements-file-format/) file that can (and should) define what version of each package should be used. See [Python package requirements](#python-package-requirements) for more details.
+- R packages and some JupyterLab extensions are specified in `environment/Dockerfile`. Hopefully you will not need to modify the Docker configuration outside of this. See more about [R package requirements](#r-package-requirements) and [JupyterLab extensions](#jupyterlab-extensions).
+- Jupyter server configuration can be managed in `environment/jupyter_server_config.py`.
+
 
 
 ### `README.md`

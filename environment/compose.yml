@@ -15,3 +15,4 @@ services:
       # that can all be checked into version control.
       - '../analysis:/home/jovyan/'
       - '../data:/home/jovyan/data'
+      - './jupyter_server_config.py:/home/jovyan/.jupyter/jupyter_server_config.py'
