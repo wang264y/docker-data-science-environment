@@ -27,17 +27,6 @@ docker compose -f environment/compose.yml up -d
 
 When it's done spinning up, the container will be accessible at http://localhost:10000/
 
-#### Getting your random authentication token for logging into the web interface
-
-This does change every time you rebuild the container / randomly.
-
-At the command line:
-```bash
-docker compose -f environment/compose.yml exec datascience-notebook jupyter server list
-```
-
-__TODO__ explore a different authentication method that isn't this annoying.
-
 
 ### Stop JupyterLab
 
