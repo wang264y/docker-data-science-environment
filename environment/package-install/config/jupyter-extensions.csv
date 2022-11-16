@@ -1,0 +1,12 @@
+# Extensions to install
+#  preferred format:
+#    extension-name,version-number
+#  If the extension cannot be installed with Python, add a third parameter: "manual":
+#    extension-name,version-number,manual
+ipympl,0.9.2
+jupyterlab-spellchecker,0.7.2
+jupyterlab_execute_time,2.3.0
+jupyterlab-system-monitor,0.8.0
+jupyterlab-spreadsheet,0.4.1,manual
+@lckr/jupyterlab_variableinspector,3.0.7,manual
+jupyterlab-git,0.39.3

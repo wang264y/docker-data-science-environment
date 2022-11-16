@@ -13,6 +13,6 @@ services:
     volumes:
       # This connects the Jupyter notebook directory to the host machine so
       # that can all be checked into version control.
-      - '../analysis:/home/jovyan/'
-      - '../data:/home/jovyan/data'
-      - './jupyter_server_config.py:/home/jovyan/.jupyter/jupyter_server_config.py'
+      - '../:/home/jovyan/'
+    command: bash ./environment/finish-setup.sh
+

@@ -1,7 +1,5 @@
 # Ignore dotfiles and dotdirectories
 .*
-# but don't ignore jupyter_server_config.py, we need to save the password config
-!.jupyter/jupyter_server_config.py
 
 # Ignore autosave information
 **/.ipynb_checkpoints/

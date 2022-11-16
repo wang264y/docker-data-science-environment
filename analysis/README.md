@@ -17,11 +17,7 @@ Autosave files found `.ipynb_checkpoints/` are not available to version control 
 
 ### `.gitignore`
 
-A classic [`.gitignore`](https://git-scm.com/docs/gitignore) file for specifying what files Git should consider as not eligible for version control. This is how we exclude autosave information from our repository.
-
-### `.jupyter/jupyter_server_config.py`
-
-The Jupyter server configuration. This is where we disable token authentication, since it's not needed for an application just running on a private host machine.
+A classic [`.gitignore`](https://git-scm.com/docs/gitignore) file for specifying what files Git should consider as not eligible for version control. This is how we exclude autosave information from our repository. We also ignore the symlink to `data/` -- that is automatically rebuilt at need when the container is built.
 
 
 ### `demo-notebooks`
@@ -35,8 +31,3 @@ This notebook uses Python to retrieve a given URL (google.com), print the HTML r
 #### `demo-notebooks/hello-world-in-r.ipynb`
 
 This notebook uses R to execute a classic "hello world" program.
-
-
-### `work/`
-
-This could also hold notebooks, and was generated (I think?) automatically by JupyterLab.
