@@ -77,3 +77,8 @@ This script runs at the end of the Docker container creation. It places `jupyter
 ### [`package-install/install-packages-and-extensions.sh`](package-install/install-packages-and-extensions.sh)
 
 This script installs the Python packages, R packages, and Jupyter extensions specified in `package-install/config`. See more about this in the [project README](../README.md#add-packages-and-extensions).
+
+
+### [`jupyter_server_config.py`](jupyter_server_config.py)
+
+This is where you can make changes to the Jupyter server configuration. By default, it sets the JupyterLab UI to launch in the `analysis` folder of the main project and removes server authentication since this project is only meant to be run on a researcher's computer and not in a shared or production environment.
