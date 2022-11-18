@@ -44,6 +44,16 @@ docker compose -f environment/compose.yml start
 ```
 
 
+### View the Docker container logs
+
+At the command line:
+```bash
+docker logs -f environment_datascience-notebook_1
+```
+
+**NOTE** if this command doesn't work, find your container's name using `docker container ls`. The container name will be in the last column and should contain `datascience-notebook`. Replace `environment_datascience-notebook_1` in the log command above with your container's name.
+
+
 
 ## Add packages and extensions
 
