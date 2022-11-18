@@ -64,23 +64,17 @@ function install_jupyter_extensions() {
 # Install each extension in ${R_PACKAGES_CSV}
 # =============================================================================
 function install_r_packages() {
-  checkMD5Sum ${R_PACKAGES_CSV_MD5_LOCK_FILE} ${R_PACKAGES_CSV}
+  checkMD5Sum ${R_PACKAGES_R_MD5_LOCK_FILE} ${R_PACKAGES_R}
   if [ $? == 0 ]; then
-    log $PID "${R_PACKAGES_CSV} has not changed since last run. Delete ${R_PACKAGES_CSV_MD5_LOCK_FILE} to force install attempt."
+    log $PID "${R_PACKAGES_R} has not changed since last run. Delete ${R_PACKAGES_R_MD5_LOCK_FILE} to force install attempt."
     return;
   fi
 
   # Do the processing
-  while IFS="" read -r PACKAGE_URL || [ -n "$PACKAGE_URL" ]
-  do
-    # Ignore lines in the input that begin with `#`
-    [[ $PACKAGE_URL =~ ^#.* ]] && continue
-    log $PID "Installing $PACKAGE_URL"
-    R -e "install.packages('${PACKAGE_URL}', repos=NULL, type='source')"
-  done < ${R_PACKAGES_CSV}
+  ${R_PACKAGES_R}
 
   # Create lockfile for the current version of these requirements
-  md5sum ${R_PACKAGES_CSV} > ${R_PACKAGES_CSV_MD5_LOCK_FILE}
+  md5sum ${R_PACKAGES_R} > ${R_PACKAGES_R_MD5_LOCK_FILE}
 }
 
 # =============================================================================
@@ -94,7 +88,6 @@ function install_python_packages() {
   fi
 
   # Do the processing
-
   log $PID "Installing ${PYTHON_REQUIRMENTS_TXT}"
   pip install --quiet --no-cache-dir --requirement ${PYTHON_REQUIRMENTS_TXT}
 
@@ -111,14 +104,40 @@ PACKAGE_INSTALL_CONFIG_DIR="./environment/package-install/config"
 JUPYTER_EXTENSION_CSV="${PACKAGE_INSTALL_CONFIG_DIR}/jupyter-extensions.csv"
 JUPYTER_EXTENSION_CSV_MD5_LOCK_FILE="${PACKAGE_INSTALL_CONFIG_DIR}/.jupyter-extensions.csv.md5"
 
-R_PACKAGES_CSV="${PACKAGE_INSTALL_CONFIG_DIR}/r-packages.csv"
-R_PACKAGES_CSV_MD5_LOCK_FILE="${PACKAGE_INSTALL_CONFIG_DIR}/.r-packages.csv.md5"
+R_PACKAGES_R="${PACKAGE_INSTALL_CONFIG_DIR}/r-packages.R"
+R_PACKAGES_R_MD5_LOCK_FILE="${PACKAGE_INSTALL_CONFIG_DIR}/.r-packages.R.md5"
 
 PYTHON_REQUIRMENTS_TXT="${PACKAGE_INSTALL_CONFIG_DIR}/requirements.txt"
 PYTHON_REQUIRMENTS_TXT_MD5_LOCK_FILE="${PACKAGE_INSTALL_CONFIG_DIR}/.requirements.txt.md5"
 
 
+for i in "$@"
+do
+case $i in
+    --force|-f)
+      FORCE=true
+      ;;
+    *)
+      log_error $PID "Invalid argument ${i} in command: $0 $*"
+      exit 1
+  esac
+  shift
+done
 
+# If --force, remove lockfiles
+if [ ${FORCE} ]; then
+  if [ -f /home/${NB_USER}/environment/package-install/config/.jupyter-extensions.csv.md5 ]; then
+    rm /home/${NB_USER}/environment/package-install/config/.jupyter-extensions.csv.md5
+  fi
+  if [ -f /home/${NB_USER}/environment/package-install/config/.r-packages.R.md5 ]; then
+    rm /home/${NB_USER}/environment/package-install/config/.r-packages.R.md5
+  fi
+  if [ -f /home/${NB_USER}/environment/package-install/config/.requirements.txt.md5 ]; then
+    rm /home/${NB_USER}/environment/package-install/config/.requirements.txt.md5
+  fi
+fi
+
+# Install
 log $PID "Installing Jupyter extensions";
 install_jupyter_extensions;
 log $PID "Installing R packages";

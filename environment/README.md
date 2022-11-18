@@ -45,23 +45,12 @@ However, that level of complexity is likely unnecessary for this use.
 
 
 
-## Notes on implementation
-
-This project is set up to save the environment (JupyterLab, notebooks, and R/Python packages) for the project. It is _not_ set up to keep autosave information or other [dotfiles](https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory) that are understood as incidental and unrelated to the reproducibility of the research results.
-
-
-### JupyterLab
-
-This repository provides the scaffolding for a Docker-based JupyterHub service/container based on the [`jupyter/datascience-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook) image.
-
-
-
 ## Structure
 
 
-### `Dockerfile` and `compose.yml`
+### `compose.yml`
 
-These files configure the configuration for the Docker part of the environment. The container is based on the [`jupyter/datascience-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook) image, maps the project directory on your host machine to `/home/jovyan` in the container, and runs `finish-setup.sh`.
+This file defines the configuration for the Docker part of the environment. The container is based on the [`jupyter/datascience-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook) image, maps the project directory on your host machine to `/home/jovyan` in the container, and runs `finish-setup.sh`.
 
 
 ### [`helpers.sh`](helpers.sh)

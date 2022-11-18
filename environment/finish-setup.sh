@@ -15,7 +15,8 @@ fi
 
 # Install packages and extensions
 log $PID "Installing custom packages and extensions"
-/home/${NB_USER}/environment/package-install/install-packages-and-extensions.sh
+log $PID "  Since we're rebuilding, force a re-install by removing the lockfiles"
+/home/${NB_USER}/environment/package-install/install-packages-and-extensions.sh --force
 
 # Fix permissions
 log $PID "Fixing permissions"
