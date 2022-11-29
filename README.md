@@ -38,6 +38,12 @@ docker compose -f environment/compose.yml up -d
 
 It takes a while after the second command returns for the container to become available, as it builds and installs all of the extensions and packages for JupyterLab. You can either wait a while, or monitor the startup progress by [viewing the Docker logs](#view-the-docker-container-logs).
 
+If you are monitoring the logs, the container is ready when this message appears:
+
+ ```bash
+ [I yyyy-MM-dd HH:mm:ss.SSS ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+ ```
+
 When it's done spinning up, the container will be accessible at http://localhost:10000/
 
 
@@ -65,6 +71,8 @@ docker logs -f environment_datascience-notebook_1
 ```
 
 **NOTE** if this command doesn't work, find your container's name using `docker container ls`. The container name will be in the last column and should contain `datascience-notebook`. Replace `environment_datascience-notebook_1` in the log command above with your container's name.
+
+You can exit the logs using the key command `control+c` (also sometimes written as `^C`).
 
 
 
