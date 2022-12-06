@@ -19,6 +19,12 @@ This repository provides the scaffolding for a Docker-based JupyterLab service/c
 
 
 
+## Setting up your own repository using this template
+
+[You can set up your own GitHub project using this template repository](SETTING-UP-YOUR-PROJECT.md).
+
+
+
 ## Interacting with JupyterLab / Docker
 
 You'll need some special commands in order to actually use the JupyterLab in Docker.
@@ -129,6 +135,27 @@ You can force an install attempt for all packages and extensions by adding the `
 ```bash
 docker compose -f environment/compose.yml exec datascience-notebook ./environment/package-install/install-packages-and-extensions.sh --force
 ```
+
+
+
+## Running multiple environments simultaneously
+
+1. [Set up another new GitHub project using this template repository](SETTING-UP-YOUR-PROJECT.md).
+
+1. Before you [build and bring up JupyterLab](#build-and-bring-up-jupyterlab), edit `environment/compose.yml` and change:
+    1. The service name from `datascience-notebook` to something else. This will be the base of the Docker container's name. Do not use spaces, instead use hyphens (`-`) or underscores (`_`).
+    1. The first half of the port entry from `10000` to something else - I suggest incrementing by one each time (eg `10001`, `10002`, etc).
+
+1. When you bring up JupyterLab, you may see this warning. That's okay, you can ignore it.
+    ```bash
+    WARN[0000] Found orphan containers ([environment_datascience-notebook_1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up. 
+    ```
+
+1. The URL for the new environment will be slightly different as well. Instead of http://localhost:10000, it will use your new port number (eg http://localhost:10001).
+
+1. Note that you will need to replace `datascience-notebook` with your new container name in the `docker` commands that reference the container name.
+
+
 
 
 
