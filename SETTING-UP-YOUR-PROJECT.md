@@ -72,53 +72,6 @@ To set up a project that you can share amongst your team using GitHub, there are
     ```
 
 
-### Push/pull from your repository on GitHub
-
-1. Add and commit changes to your project:
-    ```bash
-    git add .
-    git commit -m "Made changes"
-    ```
-
-1. Push the local changes to your project up to your repository on GitHub:
-    ```bash
-    git push
-    ```
-
-1. Pull from your repository on GitHub:
-    ```bash
-    git pull
-    ```
-
-
-### Pulling changes from the parent template into your project
-
-1. Change directory into your project:
-    ```bash
-    cd your-project-name
-    ```
-
-1. Pull the `main` branch of the template repository into your local copy of your project:
-    ```bash
-    git pull --no-rebase template main
-    ```
-
-1. If there are merge conflicts, resolve them in your favorite text editor, then commit them to your project:
-    ```bash
-    git commit
-    ```
-
-1. Push the changes to your project up to your repository on GitHub:
-    ```bash
-    git push
-    ```
-
-
-### Pushing changes to the parent template
-
-1. You can't. [Open an issue on the template repository](https://github.com/mtholyoke/docker-data-science-environment/issues) to inquire about global changes.
-
-
 
 ## 2. Configure your specific environment
 
@@ -164,7 +117,18 @@ This is a good time to [specify your packages and extensions](QUICKSTART.md#add-
 
 ## 6. Preserve your new project / environment
 
-[Add, commit, and push your changes to your repository](#pushpull-from-your-repository-on-github). This makes the current state of your environment available to other collaborators on your GitHub repository.
+1. Add and commit the changes to your project:
+    ```bash
+    git add .
+    git commit -m "Made changes"
+    ```
+
+1. Push the local changes to your project up to your repository on GitHub:
+    ```bash
+    git push
+    ```
+
+This makes the current state of your environment available to other collaborators on your GitHub repository.
 
 
 
