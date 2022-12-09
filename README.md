@@ -1,16 +1,21 @@
-# Quickstart guide
+# Docker for Data Science environment
 
-This project was developed in response to [a request from the Mount Holyoke College Sociology Data Lab to LITS](https://docs.google.com/document/d/1aEAwJX2ccDEbcrMphFKG6Z8XaFU-yQ4xG-hqFXWdCT0/edit) for assistance in creating a standardized and reproducible data science research environment.
+This project was developed in response to [a request from the Mount Holyoke College Sociology Data Lab ](https://docs.google.com/document/d/1aEAwJX2ccDEbcrMphFKG6Z8XaFU-yQ4xG-hqFXWdCT0/edit) for assistance in creating a standardized and reproducible data science research environment. 
+
+The template repository was developed by [Abby Drury](https://lits.mtholyoke.edu/about-lits/staff/abby-drury) in the [Academic Technologies department in LITS](https://lits.mtholyoke.edu/about-lits/departments/technology-infrastructure-systems-support/academic-technologies) in consultation with [Benjamin Gebre-Medhin](https://www.mtholyoke.edu/directory/faculty-staff/benjamin-gebre-medhin) from the Department of Sociology and Anthropology and the Data Science Committee.
+
+
+
+## Implementation notes
+
+This project is set up to save the environment (JupyterLab, notebooks, and R/Python packages) for the project. It is _not_ set up to keep autosave information or other [dotfiles](https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory) that are understood as incidental and unrelated to the reproducibility of the research results.
 
 There is more detail on the Docker environment and for more details on prerequisites for the environment in [the environment README](environment/README.md).
 
-**TODO** `analysis` and `data` also have their own READMEs. Please be sure to update them to reflect your project.
 
+### A warning on documentation stubs
 
-
-## Notes on implementation
-
-This project is set up to save the environment (JupyterLab, notebooks, and R/Python packages) for the project. It is _not_ set up to keep autosave information or other [dotfiles](https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory) that are understood as incidental and unrelated to the reproducibility of the research results.
+The `analysis` and `data` directories also have their own READMEs. Please be sure to update them to reflect your project.
 
 
 ### JupyterLab
@@ -19,142 +24,44 @@ This repository provides the scaffolding for a Docker-based JupyterLab service/c
 
 
 
-## Setting up your own repository using this template
+## Getting started
 
-[You can set up your own GitHub project using this template repository](SETTING-UP-YOUR-PROJECT.md).
+- Need to create a new project? [Set up a brand new environment and repository from this template for your project / team](SETTING-UP-YOUR-PROJECT.md).
 
+- Someone already set up an environment for your project? Clone their repository, then [build and bring up JupyterLab](SETTING-UP-YOUR-PROJECT.md#3-build-and-bring-up-jupyterlab).
 
-
-## Interacting with JupyterLab / Docker
-
-You'll need some special commands in order to actually use the JupyterLab in Docker.
-
-These commands assume that you:
-- Already have Docker running.
-- Have opened a shell and `cd`ed to the root directory for this project, which is the directory in which this file resides.
-
-
-### Build and bring up JupyterLab 
-
-At the command line:
-```bash
-docker compose -f environment/compose.yml build
-docker compose -f environment/compose.yml up -d
-```
-
-It takes a while after the second command returns for the container to become available, as it builds and installs all of the extensions and packages for JupyterLab. You can either wait a while, or monitor the startup progress by [viewing the Docker logs](#view-the-docker-container-logs).
-
-When it's done spinning up, the container will be accessible at http://localhost:10000/
-
-
-### Stop JupyterLab
-
-At the command line:
-```bash
-docker compose -f environment/compose.yml stop
-```
-
-
-### Start JupyterLab after stopping it
-
-At the command line:
-```bash
-docker compose -f environment/compose.yml start
-```
-
-
-### View the Docker container logs
-
-At the command line:
-```bash
-docker logs -f environment_datascience-notebook_1
-```
-
-**NOTE** if this command doesn't work, find your container's name using `docker container ls`. The container name will be in the last column and should contain `datascience-notebook`. Replace `environment_datascience-notebook_1` in the log command above with your container's name.
+- Previously cloned the repository for your project and just need a refresher? Check out the [quickstart guide](QUICKSTART.md).
 
 
 
-## Add packages and extensions
+## Working with this documentation
 
-### Python package requirements
-
-Python package requirements can be specified in `environment/package-install/config/requirements.txt`. This is a classic [`requirements.txt`](https://pip.pypa.io/en/stable/reference/requirements-file-format/).
-
-For reproducibility, you should specify the version of the package to the exact version you are using when you add packages to the requirements file:
-```python
-packageName==packageVersion
-```
-
-If you change the requirements, you will need to [install packages and extensions](#install-packages-and-extensions) in order for those changes to take effect.
+Ideally, references to `SERVICE_NAME`, `CONTAINER_NAME`, and `PORT_NUMBER` will be updated when [each project is set up](SETTING-UP-YOUR-PROJECT.md#4-update-references-in-the-readme).
 
 
-### R package requirements
+### Getting your service name, container name, and port
 
-1. Find the package on cran.r-project.org (eg: https://cran.r-project.org/package=XML)
-1. Find the appropriate version of the package, either in the "Package source" link or on the "Old sources" archive page.
-1. In `environments/package-install/config/r-packages.R` add the package name and version on a new line:
-    ```R
-    if (! require("XML") || packageVersion("XML") != "3.99.0.3") { install_version("XML", version="3.99.0.3") }
-    ```
-    This checks whether the package is already installed and at the proper version, and installs it if it is missing or at the wrong version.
-1. [Install packages and extensions](#install-packages-and-extensions).
+Throughout the [QUICKSTART document](QUICKSTART.md), you wil see references to `SERVICE_NAME`, `CONTAINER_NAME`, and `PORT_NUMBER`. In your project repository, you may wish to find and replace these references with the relevant values for readability.
 
-Hints:
-1. If the most recent version of the package won't install, you can figure out the most recent compatible version by running `packages.install("package-name")` in an R notebook in JupyterLab, then running `packageVersion("package-name")`. Then, be sure to find that version on cran.r-project.org and add that version of the package to `environments/package-install/config/r-packages.R`.
+#### Finding the SERVICE_NAME
 
+This is in `environment/compose.yml` file, right under the `services:` key. 
 
-### JupyterLab extensions
+In the template repository, `SERVICE_NAME` is `datascience-notebook` and is found on line 3 of the file.
 
-1. Find the extension and version that you want.
-1. Add the extension name and version to `environment/package-install/config/jupyter-extensions.txt` as a new line.
-    1. If the extension can be installed successfully via `pip`, use the following syntax:
-        ```csv
-        ipympl,0.9.2
-        ```
-    1. If the extension cannot be installed using `pip` or otherwise must be installed using `jupyter labextension install`, use the following syntax:
-        ```csv
-        jupyterlab-spreadsheet,0.4.1,manual
-        ```
-1. [Install packages and extensions](#install-packages-and-extensions).
+#### Finding the CONTAINER_NAME
 
+Find your container's name using `docker container ls`. The container name will be in the last column and should contain `SERVICE_NAME`. 
 
-### Install packages and extensions
+Note that, depending on your computer, Docker may use hyphens (`-`) or underscores (`_`) in container names. This means that the container name could be slightly different amongst your team.
 
-You can install the currently specified packages and extensions into a running container with:
-```bash
-docker compose -f environment/compose.yml exec datascience-notebook ./environment/package-install/install-packages-and-extensions.sh 
-```
+In the template repository, `CONTAINER_NAME` is something like `environment_datascience-notebook_1` or `environment-datascience-notebook-1`.
 
-You can also install packages and extensions by [rebuilding the container](#rebuilding-the-container).
+#### Finding the PORT_NUMBER
 
-#### The lockfiles
+This is in `environment/compose.yml` file under the `ports:` key, and is the first value in the colon (`:`) separated port numbers.
 
-The project does use lockfiles to prevent repeated attempts to install packages if the configuration file hasn't changed. You can detect this in the [container logs](#view-the-docker-container-logs), after running `install-packages-and-extensions.sh`. 
-
-You can force an install attempt for all packages and extensions by adding the `--force` flag:
-```bash
-docker compose -f environment/compose.yml exec datascience-notebook ./environment/package-install/install-packages-and-extensions.sh --force
-```
-
-
-
-## Running multiple environments simultaneously
-
-1. [Set up another new GitHub project using this template repository](SETTING-UP-YOUR-PROJECT.md).
-
-1. Before you [build and bring up JupyterLab](#build-and-bring-up-jupyterlab), edit `environment/compose.yml` and change:
-    1. The service name from `datascience-notebook` to something else. This will be the base of the Docker container's name. Do not use spaces, instead use hyphens (`-`) or underscores (`_`).
-    1. The first half of the port entry from `10000` to something else - I suggest incrementing by one each time (eg `10001`, `10002`, etc).
-
-1. When you bring up JupyterLab, you may see this warning. That's okay, you can ignore it.
-    ```bash
-    WARN[0000] Found orphan containers ([environment_datascience-notebook_1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up. 
-    ```
-
-1. The URL for the new environment will be slightly different as well. Instead of http://localhost:10000, it will use your new port number (eg http://localhost:10001).
-
-1. Note that you will need to replace `datascience-notebook` with your new container name in the `docker` commands that reference the container name.
-
+In the template repository, `PORT_NUMBER` is `10000` and is found on line 9 of the file.
 
 
 
@@ -187,3 +94,12 @@ This is where the Docker, Python package, and Jupyter server configuration live.
 
 You're looking at it right now. :)
 
+
+
+### `QUICKSTART.md`
+
+
+
+### `SETTING-UP-YOUR-PROJECT.md`
+
+This contains instructions on how to clone the template repository, create and connect your own GitHub repository to your project, customize your environment, and build / bring up JupyterLab for the first time.
