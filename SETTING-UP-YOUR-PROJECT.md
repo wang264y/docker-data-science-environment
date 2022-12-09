@@ -79,11 +79,6 @@ To set up a project that you can share amongst your team using GitHub, there are
     1. The service name from `datascience-notebook` to something else, possibly `your-project-name` for simplicity. This will be the base of the Docker container's name. Do not use spaces, instead use hyphens (`-`) or underscores (`_`).
     1. The first half of the port entry from `10000` to something else - I suggest incrementing by one each time (eg `10001`, `10002`, etc).
 
-1. When you bring up JupyterLab, you may see this warning. That's okay, you can ignore it.
-    ```bash
-    WARN[0000] Found orphan containers ([<some_container_name>]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up. 
-    ```
-
 
 
 ## 3. Build and bring up JupyterLab 
@@ -99,7 +94,10 @@ docker compose -f environment/compose.yml build
 docker compose -f environment/compose.yml up -d
 ```
 
-
+When you bring up JupyterLab, you may see this warning. That's okay, you can ignore it.
+```bash
+WARN[0000] Found orphan containers ([<some_container_name>]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up. 
+```
 
 ## 4. Update references in the documentation
 
