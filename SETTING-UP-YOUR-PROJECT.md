@@ -125,7 +125,7 @@ This is a good time to [specify your packages and extensions](QUICKSTART.md#add-
 
 1. Push the local changes to your project up to your repository on GitHub:
     ```bash
-    git push
+    git push -u origin
     ```
 
 This makes the current state of your environment available to other collaborators on your GitHub repository.

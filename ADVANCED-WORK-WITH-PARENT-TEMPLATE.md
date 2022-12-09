@@ -23,7 +23,7 @@ Occasionally, the template repository may change. If it does, you can elect to i
 
 1. Push the changes to your project up to your repository on GitHub:
     ```bash
-    git push
+    git push -u origin
     ```
 
 
