@@ -55,6 +55,13 @@ These commands assume that you:
 
     If you have trouble with this command, [double check your container name](README.md#finding-the-container_name).
 
+1. If you are monitoring the logs during start up, the container is ready when this message appears:
+    ```bash
+    [I yyyy-MM-dd HH:mm:ss.SSS ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+    ```
+
+1. You can exit the logs using the key command `control+c` (also sometimes written as `^C`).
+
 
 
 ## Add packages and extensions
