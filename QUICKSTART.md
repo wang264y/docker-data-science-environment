@@ -23,12 +23,6 @@ These commands assume that you:
 - Have opened a shell and `cd`ed to the root directory for this project, which is the directory in which this file resides.
 
 
-### Access JupyterLab in your browser
-
-It takes a while after the `up -d` command returns for the container to become available, as it builds and installs all of the extensions and packages for JupyterLab. You can either wait a while, or monitor the startup progress by [viewing the Docker logs](#view-the-docker-container-logs).
-
-When it's done spinning up, the container will be accessible at `http://localhost:PORT_NUMBER/` (eg. http://localhost:10000).
-
 
 ### Stop JupyterLab
 
@@ -46,6 +40,10 @@ When it's done spinning up, the container will be accessible at `http://localhos
     ```bash
     docker compose -f environment/compose.yml start
     ```
+
+1. It takes a while after the `up -d` command returns for the container to become available, as it builds and installs all of the extensions and packages for JupyterLab. You can either wait a while, or monitor the startup progress by [viewing the Docker logs](#view-the-docker-container-logs).
+
+1. When it's done spinning up, the container will be accessible at `http://localhost:PORT_NUMBER/` (eg. http://localhost:10000).
 
 
 ### View the Docker container logs
