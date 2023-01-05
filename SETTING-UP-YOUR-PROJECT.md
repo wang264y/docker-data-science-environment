@@ -101,7 +101,7 @@ WARN[0000] Found orphan containers ([<some_container_name>]) for this project. I
 
 ## 4. Update references in the documentation
 
-1. In the [QUICKSTART file](QUICKSTART.md), find and replace `SERVICE_NAME`, `CONTAINER_NAME`, and `PORT_NUMBER` with the appropriate values. Guidance on how to find those values is located in that file.
+1. In the [QUICKSTART file](QUICKSTART.md), find and replace `SERVICE_NAME`, `CONTAINER_NAME`, and `PORT_NUMBER` with the appropriate values. Guidance on how to find those values is located in the main [README.md](README.md#working-with-this-documentation).
 
 1. In the ["Need more help?" section of the QUICKSTART file](QUICKSTART.md#need-more-help), update the project sponsor contact information.
 
