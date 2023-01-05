@@ -85,9 +85,9 @@ This is where your data should go. These files are shared between the Docker con
 
 This is where the Docker, Python package, and Jupyter server configuration live. You can generally ignore most of it, but there are 4 files to be aware of.
 
-- Python packages are specified in `environment/package-install/config/requirements.txt`. See [Python package requirements](QUICKSTART.md#python-package-requirements) for more details.
-- R packages are specified in `package-install/config/r-packages.R`. See [R package requirements](QUICKSTART.md#r-package-requirements) for more details.
-- JupyterLab extensions are specified in `package-install/config/jupyter-extensions.csv`. See [JupyterLab extension requirements](QUICKSTART.md#jupyterlab-extensions) for more details.
+- Python packages are specified in `environment/requirements.txt`. See [Python package requirements](QUICKSTART.md#python-package-requirements) for more details.
+- R packages are specified in `environment/r-packages.R`. See [R package requirements](QUICKSTART.md#r-package-requirements) for more details.
+- JupyterLab extensions are specified in `environment/jupyter-extensions.csv`. See [JupyterLab extension requirements](QUICKSTART.md#jupyterlab-extensions) for more details.
 - Jupyter server configuration can be managed in `environment/jupyter_server_config.py`. You probably won't need to modify this, but it's good to know about.
 
 

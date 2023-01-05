@@ -53,19 +53,14 @@ However, that level of complexity is likely unnecessary for this use.
 This file defines the configuration for the Docker part of the environment. The container is based on the [`jupyter/datascience-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook) image, maps the project directory on your host machine to `/home/jovyan` in the container, and runs `finish-setup.sh`.
 
 
-### [`helpers.sh`](helpers.sh)
+### [`requirements.txt`](requirements.txt), [`r-packages.R`](r-packages.R), and [`jupyter-extensions.csv`](jupyter-extensions.csv)
 
-This script is included by `finish-setup.sh` and `package-install/install-packages-and-extensions.sh`. It contains code that both scripts use, mostly around logging.
-
-
-### [`finish-setup.sh`](finish-setup.sh)
-
-This script runs at the end of the Docker container creation. It places `jupyter_server_config.py` in the container in the expected place, makes the `data` directory available in the Jupyter UI, installs the packages and extensions using `package-install/install-packages-and-extensions.sh`, and starts JupyterLab.
+This is where you specify what packages need to be installed.
 
 
-### [`package-install/install-packages-and-extensions.sh`](package-install/install-packages-and-extensions.sh)
+### [`install-jupyter-extensions.sh`](install-jupyter-extensions.sh)
 
-This script installs the Python packages, R packages, and Jupyter extensions specified in `package-install/config`. See more about this in the [project README](../README.md#add-packages-and-extensions).
+This script installs the JupyterLab extensions, and is run by the `Dockerfile`.
 
 
 ### [`jupyter_server_config.py`](jupyter_server_config.py)

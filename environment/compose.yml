@@ -1,8 +1,11 @@
 version: '3.9'
 services:
   datascience-notebook:
-    # Start with this Docker image
-    image: jupyter/datascience-notebook:9e63909e0317
+    # Specify where the project parent directory is, and where the Dockerfile
+    # is within that structure.
+    build:
+      context: ../
+      dockerfile: ./environment/Dockerfile
     # Map port 8888 in the container to port 10000 on the host machine.
     # This is what makes jupyter accessible at localhost:10000
     ports:
@@ -10,7 +13,10 @@ services:
     # This connects the Jupyter notebook directory to the host machine so
     # that can all be checked into version control.
     volumes:
-      - '../:/home/jovyan/'
-    # Install packages/extensions and start Jupyter server
-    command: [ "bash", "./environment/finish-setup.sh" ]
-
+      # Link the analysis directory into the container
+      - '../analysis:/home/jovyan/analysis'
+      # Link the data directory into the container so it can be made visible in
+      # the JupyterLab UI
+      - '../data:/home/jovyan/data'
+      # Make the server config file available in the correct place
+      - '../environment/jupyter_server_config.py:/home/jovyan/.jupyter/jupyter_server_config.py'
