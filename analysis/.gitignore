@@ -4,5 +4,3 @@
 # Ignore autosave information
 **/.ipynb_checkpoints/
 
-# Ignore data, it's a duplicate here and is under version control at ../data
-data
