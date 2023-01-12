@@ -54,7 +54,7 @@ Containers must be built if:
 - you are using the environment for the first time
 - you have made changes to any of the environment files listed above
 
-Otherwise, you may proceed to Starting a [stopped container](#Starting a stopped container)
+Otherwise, you may proceed to [Starting a stopped container](#Starting-a-stopped-container)
 
 
 ## Building a container
