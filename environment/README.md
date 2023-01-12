@@ -47,7 +47,8 @@ This is where you can make changes to the Jupyter server configuration. By defau
 ## Assumptions
 
 - Docker is running
-- You have a terminal session and your current working directory is the main project directory. 
+- You have a terminal session
+- Your current working directory is set to the main project directory.
 
 Containers must be built if:
 - you are using the environment for the first time
