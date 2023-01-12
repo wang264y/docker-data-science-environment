@@ -18,4 +18,4 @@ Data to be shared between docker container and local machine.
 
 ### `environment/`
 
-Docker related files and package lists for Python and R.
+Docker related files and package lists for Python and R as well as JupyterLab plug-ins.
