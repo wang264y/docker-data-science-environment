@@ -74,17 +74,19 @@ WARN[0000] Found orphan containers ([<some_container_name>]) for this project. I
 
 ## Starting a stopped container
 
-1. To start the JupyterLab Docker container, at the command line:
-    ```bash
-    docker compose -f environment/compose.yml start
-    ```
+To start the JupyterLab Docker container, at the command line:
+```bash
+docker compose -f environment/compose.yml start
+```
 
-1. When it's done spinning up, the container will be accessible at `http://localhost:PORT_NUMBER/` (eg. http://localhost:10000).
+### Accessing JupyterLab
+
+When it's done spinning up, the container will be accessible at `http://localhost:PORT_NUMBER/` (eg. http://localhost:10000).
 
 
 ## Stopping a container
 
-1. To stop the JupyterLab Docker container, at the command line:
-    ```bash
-    docker compose -f environment/compose.yml stop
-    ```
+To stop the JupyterLab Docker container, at the command line:
+```bash
+docker compose -f environment/compose.yml stop
+```
