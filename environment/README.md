@@ -7,7 +7,7 @@ Assumptions:
 
 Containers must be built if:
 - you are using the environment for the first time
-- you have made changes to any of the environment files listed above
+- you have made changes to any of the [DS environment files}(#DS-environment-files) listed below
 
 Otherwise, you may proceed to [Starting a stopped container](#Starting-a-stopped-container)
 
@@ -60,7 +60,7 @@ This file defines the basic configuration for the Docker part of the environment
 This file uses the `Dockerfile` for most configuration, but additionally configures the container ports and maps the project directories on your host machine to `/home/jovyan` in the container.
 
 
-## DS Environment files
+## DS environment files
 
 
 ### `requirements.txt`
