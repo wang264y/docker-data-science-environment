@@ -2,16 +2,16 @@
 
 ## Docker elements
 
-### `compose.yml`
+### `compose.yml` and `Dockerfile`
 
-This file defines the configuration for the Docker part of the environment. The container is based on the [`jupyter/datascience-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook) image, maps the project directory on your host machine to `/home/jovyan` in the container, and runs `finish-setup.sh`.
+These files define the configuration for the Docker part of the environment. The container is based on the [`jupyter/datascience-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook) image, maps the project directories on your host machine to `/home/jovyan` in the container, and installs the configured packages.
 
 ## DS Environment files
 
 
 ### [`requirements.txt`](requirements.txt)
 
-Additional Packages.
+Additional Python packages.
 
 
 ### [`r-packages.R`](r-packages.R)
