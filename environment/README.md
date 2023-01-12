@@ -2,36 +2,41 @@
 
 ## Docker elements
 
-### `compose.yml` and `Dockerfile`
 
-These files define the configuration for the Docker part of the environment. The container is based on the [`jupyter/datascience-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook) image, maps the project directories on your host machine to `/home/jovyan` in the container, and installs the configured packages.
+### `compose.yml` 
+
+This file uses the `Dockerfile` for most configuration, but additionally configures the container ports and maps the project directories on your host machine to `/home/jovyan` in the container.
+
+### `Dockerfile`
+
+This file defines the basic configuration for the Docker part of the environment. The container it uses is based on the [`jupyter/datascience-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook) image, and it finishes by installing the configured packages.
 
 ## DS Environment files
 
 
-### [`requirements.txt`](requirements.txt)
+### `requirements.txt`
 
 Additional Python packages.
 
 
-### [`r-packages.R`](r-packages.R)
+### `r-packages.R`
 
 Additional R packages.
 
 
-### [`jupyter-extensions.csv`](jupyter-extensions.csv)
+### `jupyter-extensions.csv`
 
 Additional JupyterLab extensions. 
 
 
 ## Supporting files
 
-### [`install-jupyter-extensions.sh`](install-jupyter-extensions.sh)
+### `install-jupyter-extensions.sh`
 
 This script installs the JupyterLab extensions, and is run by the `Dockerfile`.
 
 
-### [`jupyter_server_config.py`](jupyter_server_config.py)
+### `jupyter_server_config.py`
 
 This is where you can make changes to the Jupyter server configuration. By default, it sets the JupyterLab UI to launch in the `analysis` folder of the main project and removes server authentication since this project is only meant to be run on a researcher's computer and not in a shared or production environment.
 
@@ -47,8 +52,31 @@ This is where you can make changes to the Jupyter server configuration. By defau
 
 ## Building a container
 
+At the command line:
+```bash
+docker compose -f environment/compose.yml build
+docker compose -f environment/compose.yml up -d
+```
 
-## Starting a container
+When you bring up JupyterLab, you may see this warning. That's okay, you can ignore it.
+```bash
+WARN[0000] Found orphan containers ([<some_container_name>]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up. 
+```
+
+
+## Starting a stopped container
+
+1. To start the JupyterLab Docker container, at the command line:
+    ```bash
+    docker compose -f environment/compose.yml start
+    ```
+
+1. When it's done spinning up, the container will be accessible at `http://localhost:PORT_NUMBER/` (eg. http://localhost:10000).
 
 
 ## Stopping a container
+
+1. To stop the JupyterLab Docker container, at the command line:
+    ```bash
+    docker compose -f environment/compose.yml stop
+    ```
