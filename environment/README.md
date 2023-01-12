@@ -7,7 +7,7 @@ Assumptions:
 
 Containers must be built if:
 - you are using the environment for the first time
-- you have made changes to any of the [DS environment files}(#ds-environment-files) listed below
+- you have made changes to any of the [DS environment files](#ds-environment-files) listed below
 
 Otherwise, you may proceed to [Starting a stopped container](#Starting-a-stopped-container)
 
