@@ -17,17 +17,17 @@ This file uses the `Dockerfile` for most configuration, but additionally configu
 
 ### `requirements.txt`
 
-Additional Python packages.
+Additional Python packages to be installed when the container is built.
 
 
 ### `r-packages.R`
 
-Additional R packages.
+Additional R packages to be installed when the container is built.
 
 
 ### `jupyter-extensions.csv`
 
-Additional JupyterLab extensions. 
+Additional JupyterLab extensions to be installed when the container is built. 
 
 
 ## Supporting files
