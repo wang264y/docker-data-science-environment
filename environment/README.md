@@ -1,47 +1,3 @@
-# Structure
-
-## Docker elements
-
-### `Dockerfile`
-
-This file defines the basic configuration for the Docker part of the environment. The container it uses is based on pinned version of the [`jupyter/datascience-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook) image, and it finishes by installing the configured packages.
-
-
-### `compose.yml` 
-
-This file uses the `Dockerfile` for most configuration, but additionally configures the container ports and maps the project directories on your host machine to `/home/jovyan` in the container.
-
-
-## DS Environment files
-
-
-### `requirements.txt`
-
-Additional Python packages to be installed when the container is built.
-
-
-### `r-packages.R`
-
-Additional R packages to be installed when the container is built.
-
-
-### `jupyter-extensions.csv`
-
-Additional JupyterLab extensions to be installed when the container is built. 
-
-
-## Supporting files
-
-### `install-jupyter-extensions.sh`
-
-This script installs the JupyterLab extensions, and is run by the `Dockerfile`.
-
-
-### `jupyter_server_config.py`
-
-This is where you can make changes to the Jupyter server configuration. By default, it sets the JupyterLab UI to launch in the `analysis` folder of the main project and removes server authentication since this project is only meant to be run on a researcher's computer and not in a shared or production environment.
-
-
 # Building, starting, and stopping a container
 
 Assumptions:
@@ -88,3 +44,49 @@ To stop the JupyterLab Docker container, at the command line:
 ```bash
 docker compose -f environment/compose.yml stop
 ```
+
+
+# Structure
+
+## Docker elements
+
+### `Dockerfile`
+
+This file defines the basic configuration for the Docker part of the environment. The container it uses is based on pinned version of the [`jupyter/datascience-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook) image, and it finishes by installing the configured packages.
+
+
+### `compose.yml` 
+
+This file uses the `Dockerfile` for most configuration, but additionally configures the container ports and maps the project directories on your host machine to `/home/jovyan` in the container.
+
+
+## DS Environment files
+
+
+### `requirements.txt`
+
+Additional Python packages to be installed when the container is built.
+
+
+### `r-packages.R`
+
+Additional R packages to be installed when the container is built.
+
+
+### `jupyter-extensions.csv`
+
+Additional JupyterLab extensions to be installed when the container is built. 
+
+
+## Supporting files
+
+### `install-jupyter-extensions.sh`
+
+This script installs the JupyterLab extensions, and is run by the `Dockerfile`.
+
+
+### `jupyter_server_config.py`
+
+This is where you can make changes to the Jupyter server configuration. By default, it sets the JupyterLab UI to launch in the `analysis` folder of the main project and removes server authentication since this project is only meant to be run on a researcher's computer and not in a shared or production environment.
+
+
