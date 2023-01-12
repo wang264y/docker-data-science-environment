@@ -2,14 +2,15 @@
 
 ## Docker elements
 
+### `Dockerfile`
+
+This file defines the basic configuration for the Docker part of the environment. The container it uses is based on pinned version of the [`jupyter/datascience-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook) image, and it finishes by installing the configured packages.
+
 
 ### `compose.yml` 
 
 This file uses the `Dockerfile` for most configuration, but additionally configures the container ports and maps the project directories on your host machine to `/home/jovyan` in the container.
 
-### `Dockerfile`
-
-This file defines the basic configuration for the Docker part of the environment. The container it uses is based on pinned version of the [`jupyter/datascience-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook) image, and it finishes by installing the configured packages.
 
 ## DS Environment files
 
