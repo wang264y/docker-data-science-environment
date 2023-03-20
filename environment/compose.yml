@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  datascience-notebook:
+  tidyverse:4.2.2:
     # Specify where the project parent directory is, and where the Dockerfile
     # is within that structure.
     build:

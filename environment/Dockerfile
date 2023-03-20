@@ -1,18 +1,23 @@
 # Based on: https://jupyter-docker-stacks.readthedocs.io/en/latest/using/recipes.html#using-mamba-install-or-pip-install-in-a-child-docker-image
 #
-# Start from a core stack version
-FROM jupyter/datascience-notebook:9e63909e0317
+# Start from a rocker image
+## the code below is adapted from https://github.com/rocker-org/rocker-versioned2/blob/master/dockerfiles/verse_4.2.2.Dockerfile
 
-# Volumes aren't in place yet 
+FROM rocker/tidyverse:4.2.2
+
+LABEL org.opencontainers.image.licenses="GPL-2.0-or-later" \
+      org.opencontainers.image.source="https://github.com/rocker-org/rocker-versioned2" \
+      org.opencontainers.image.vendor="Rocker Project" \
+      org.opencontainers.image.authors="Carl Boettiger <cboettig@ropensci.org>"
+
+ENV CTAN_REPO=https://www.texlive.info/tlnet-archive/2023/03/14/tlnet
+ENV PATH=$PATH:/usr/local/texlive/bin/linux
+
+RUN /install_verse.sh
+
+# Customize volumes
+## Volumes aren't in place yet
 COPY --chown=${NB_UID}:${NB_GID} environment/ .
-
-# Install Python packages from requirements.txt file
-RUN pip install --quiet --no-cache-dir --requirement ./requirements.txt && \
-  fix-permissions "${CONDA_DIR}" && \
-  fix-permissions "/home/${NB_USER}"
 
 # Install R packages
 RUN ./r-packages.R
-
-# Install JupyterLab extensions 
-RUN ./install-jupyter-extensions.sh
