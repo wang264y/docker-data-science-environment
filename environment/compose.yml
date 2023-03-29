@@ -1,6 +1,6 @@
-version: '3.9'
+version: '3.9' #version of the compose
 services:
-  tidyverse:4.2.2:
+  datascience-r-notebook:
     # Specify where the project parent directory is, and where the Dockerfile
     # is within that structure.
     build:
@@ -12,11 +12,11 @@ services:
       - "10000:8888"
     # This connects the Jupyter notebook directory to the host machine so
     # that can all be checked into version control.
-    volumes:
-      # Link the analysis directory into the container
-      - '../analysis:/home/jovyan/analysis'
-      # Link the data directory into the container so it can be made visible in
-      # the JupyterLab UI
-      - '../data:/home/jovyan/data'
-      # Make the server config file available in the correct place
-      - '../environment/jupyter_server_config.py:/home/jovyan/.jupyter/jupyter_server_config.py'
+    # volumes:
+    #   # Link the analysis directory into the container
+    #   - '../analysis:/home/jovyan/analysis'
+    #   # Link the data directory into the container so it can be made visible in
+    #   # the JupyterLab UI
+    #   - '../data:/home/jovyan/data'
+    #   # Make the server config file available in the correct place
+    #   - '../environment/jupyter_server_config.py:/home/jovyan/.jupyter/jupyter_server_config.py'
