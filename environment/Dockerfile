@@ -3,7 +3,8 @@
 # Start from a rocker image
 ## the code below is adapted from https://github.com/rocker-org/rocker-versioned2/blob/master/dockerfiles/verse_4.2.2.Dockerfile
 
-FROM rocker/tidyverse:4.2.2
+FROM --platform=linux/amd64 rocker/tidyverse:4.2.2
+# FROM rocker/tidyverse:4.2.2
 
 # Customize volumes
 ## Volumes aren't in place yet
