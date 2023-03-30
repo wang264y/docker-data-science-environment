@@ -3,8 +3,8 @@
 # Start from a rocker image
 ## the code below is adapted from https://github.com/rocker-org/rocker-versioned2/blob/master/dockerfiles/verse_4.2.2.Dockerfile
 
+# The following line enables rocker image to run on Macbook M1/M2 chip
 FROM --platform=linux/amd64 rocker/tidyverse:4.2.2
-# FROM rocker/tidyverse:4.2.2
 
 # Customize volumes
 ## Volumes aren't in place yet

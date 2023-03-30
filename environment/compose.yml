@@ -1,16 +1,16 @@
 version: '3.9' #version of the compose
 services:
-  datascience-r-notebook:
+  datascience-rstudio:
     # Specify where the project parent directory is, and where the Dockerfile
     # is within that structure.
     build:
       context: ../
       dockerfile: ./environment/Dockerfile
-    # Map port 8888 in the container to port 10000 on the host machine.
-    # This is what makes jupyter accessible at localhost:10000
+    # Map port 8787 in the container to port 10000 on the host machine.
+    # This is what makes rstudio accessible at localhost:10000
     ports:
-      - "10000:8888"
-    # This connects the Jupyter notebook directory to the host machine so
+      - "10000:8787"
+    # This connects the rstudio notebook directory to the host machine so
     # that can all be checked into version control.
     # volumes:
     #   # Link the analysis directory into the container
