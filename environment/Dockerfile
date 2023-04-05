@@ -4,21 +4,11 @@
 ## the code below is adapted from https://github.com/rocker-org/rocker-versioned2/blob/master/dockerfiles/verse_4.2.2.Dockerfile
 
 # The following line enables rocker image to run on Macbook M1/M2 chip
-FROM --platform=linux/amd64 rocker/tidyverse:4.2.2
+FROM --platform=linux/amd64 rocker/verse:4.2.2
 
 # Customize volumes
 ## Volumes aren't in place yet
 COPY --chown=${NB_UID}:${NB_GID} environment/ .
-
-LABEL org.opencontainers.image.licenses="GPL-2.0-or-later" \
-      org.opencontainers.image.source="https://github.com/rocker-org/rocker-versioned2" \
-      org.opencontainers.image.vendor="Rocker Project" \
-      org.opencontainers.image.authors="Carl Boettiger <cboettig@ropensci.org>"
-
-ENV CTAN_REPO=https://www.texlive.info/tlnet-archive/2023/03/14/tlnet
-ENV PATH=$PATH:/usr/local/texlive/bin/linux
-
-RUN /install_verse.sh
 
 # Install R packages
 RUN ./r-packages.R

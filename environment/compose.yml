@@ -12,11 +12,9 @@ services:
       - "10000:8787"
     # This connects the rstudio notebook directory to the host machine so
     # that can all be checked into version control.
-    # volumes:
-    #   # Link the analysis directory into the container
-    #   - '../analysis:/home/jovyan/analysis'
-    #   # Link the data directory into the container so it can be made visible in
-    #   # the JupyterLab UI
-    #   - '../data:/home/jovyan/data'
-    #   # Make the server config file available in the correct place
-    #   - '../environment/jupyter_server_config.py:/home/jovyan/.jupyter/jupyter_server_config.py'
+    volumes:
+      # Link the analysis directory into the container
+      - '../analysis:/workspace/analysis'
+      # Link the data directory into the container so it can be made visible in
+      # the JupyterLab UI
+      - '../data:/workspace/data'
