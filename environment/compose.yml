@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  datascience-notebook:
+  jupyter-r-notebook:
     # Specify where the project parent directory is, and where the Dockerfile
     # is within that structure.
     build:
